@@ -1,0 +1,54 @@
+{
+	"songs": [
+		{
+			"name": "In my feelings",
+			"artist": "Drake",
+			"album": "God's Plan"
+		},
+		{
+			"name": "Natural",
+			"artist": "Imagine Dragons",
+			"album": ""
+		},
+		{
+			"name": "Rope",
+			"artist": "Foo Fighters",
+			"album": "Wasting Light"
+		},
+		{
+			"name": "Eminem",
+			"artist": "My name is",
+			"album": "The Slim Shady LP"
+		},
+		{
+			"name": "Reapers",
+			"artist": "Muse",
+			"album": "Drones"
+		},
+		{
+			"name": "Fake Tales Of San Franisco",
+			"artist": "Arctic Monkeys",
+			"album": "Whatever people say I am, I'm not"
+		},
+		{
+			"name": "Time To Shine",
+			"artist": "DJ Q",
+			"album": "Time To Shine"
+		},
+		{
+			"name": "The Enforcer",
+			"artist": "Cause & Affect",
+			"album": "Bass Mentality 001"
+		},
+		{
+			"name": "Kickin the Door",
+			"artist": "Cause & Affect",
+			"album": "Base Mentality 001"
+		},
+		{
+			"name": "Fake Double",
+			"artist": "Cause & Affect",
+			"album": "Together"
+		}
+	]
+}
