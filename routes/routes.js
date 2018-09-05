@@ -5,23 +5,25 @@ var router = express.Router();
 
 
 router.get('/', function(req, res, next) {
-	let pagePath, pageName;
+	let pagePath, pageName, pageData;
 	const urlPath = str.removeFirstLetter(req._parsedOriginalUrl.path);
-	/* Assigns path & title, defaults to original URL path */
+	console.log(urlPath);
 
+	pagePath = pageName = urlPath;
+
+	/* Assigns custom paths & titles */
 	if (urlPath === '') {
 		pagePath = 'index';
 		pageName = 'home';
 	}
-	else if (urlPath === '/songs') {
-		pagePath = 'songs';
-		pageName = 'songs';
-	}
-	else {
-		pagePath = pageName = urlPath;
+	else if (urlPath === 'songs') {
+		pageData = require('../resources/music.json');
 	}
 
-	res.render(pagePath, { title: str.toProperCase(pageName) });
+	res.render(pagePath, {
+		title: str.toProperCase(pageName),
+		data: pageData
+	});
 });
 
 module.exports = router;
