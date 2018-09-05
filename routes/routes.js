@@ -24,6 +24,7 @@ router.get('/', function(req, res, next) {
 		title: str.toProperCase(pageName),
 		data: pageData
 	});
+
 });
 
 module.exports = router;

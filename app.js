@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var pageRouter = require('./routes/routes');
-
 var app = express();
 
 // view engine setup
