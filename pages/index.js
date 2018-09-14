@@ -1,5 +1,8 @@
+import Link from 'next/link'
+import Navbar from './navbar'
+
 const Index = () => (
-	<h1>Hello</h1>
-)
+	<Navbar />
+);
 
 export default Index
