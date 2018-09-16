@@ -1,0 +1,11 @@
+#logo-container {
+    top: 10%;
+    height: 80%;
+}
+#logo-text {
+    color: #fff;
+    display: inline-block;
+    font-size: 2.1rem;
+    margin-left: 65px;
+    font-family: 'Roboto Slab', serif;
+}

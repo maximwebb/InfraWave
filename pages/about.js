@@ -1,3 +1,10 @@
+import Header from './includes/header'
+import Navbar from './navbar';
+
 export default () => (
-	<p>This is about</p>
+	<div>
+		<Header />
+		<Navbar />
+		<p>This is about</p>
+	</div>
 )

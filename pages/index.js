@@ -1,8 +1,11 @@
-import Link from 'next/link'
 import Navbar from './navbar'
+import Header from './includes/header'
 
 const Index = () => (
-	<Navbar />
+	<div>
+		<Header />
+		<Navbar />
+	</div>
 );
 
 export default Index
