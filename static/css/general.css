@@ -1,0 +1,14 @@
+body {
+    background-color: #263238;
+    color: #FFFFFF;
+}
+
+.song-card {
+    margin: 0 50px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.song-card:hover {
+    box-shadow: 0 8px 17px 2px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.2);
+}

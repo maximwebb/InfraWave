@@ -1,10 +1,14 @@
 import Header from './includes/header'
-import Navbar from './navbar';
+import Navbar from './includes/navbar'
+import Title from './components/title'
 
 export default () => (
 	<div>
 		<Header />
 		<Navbar />
-		<p>This is about</p>
+		<div className="container">
+			<Title text={"About InfraWave"} />
+			<p>This is about</p>
+		</div>
 	</div>
 )

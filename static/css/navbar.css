@@ -9,3 +9,11 @@
     margin-left: 65px;
     font-family: 'Roboto Slab', serif;
 }
+
+#home-tab {
+    padding-top: 30%;
+    padding-bottom: 30%;
+    height: 100%;
+    display: block;
+    font-size: 190%;
+}
