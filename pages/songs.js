@@ -1,7 +1,8 @@
 import Navbar from './includes/navbar'
 import Header from './includes/header'
 import Title from './components/title'
-import SongCard from './components/song-card'
+import SongCard from './components/card'
+import React from "react";
 
 const Songs = () => (
 	<div>
@@ -9,9 +10,11 @@ const Songs = () => (
 		<Navbar />
 		<div className={"container"}>
 			<Title text={"Songs"} />
-			<div className={"row"}>
-				<SongCard title={"AM - Arctic Monkeys"} text={"AM is the fifth studio album by English indie rock band Arctic Monkeys. It was produced by James Ford and co-produced by Ross Orton at Sage & Sound."} image={"https://www.radioeins.de/content/dam/rbb/rad/archiv/alben/a/am_von_arctic_monkeys.jpg.jpg/img.jpg"} />
-				<SongCard title={"Wasting Light - Foo Fighters"} text={"Wasting Light is the seventh studio album by American rock band Foo Fighters. It was released on April 12, 2011 on RCA Records, and is the first album to feature rhythm guitarist Pat Smear since The Colour and the Shape."} image={"https://img.discogs.com/ifWjm1vxuUupHl8n6YouNkQx-70=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-2817423-1304635652.jpeg.jpg"} />
+			<div className={"row center"}>
+
+				<SongCard title={"Do I wanna know? - Arctic Monkeys"} text={"From AM (2012)"} image={"https://www.radioeins.de/content/dam/rbb/rad/archiv/alben/a/am_von_arctic_monkeys.jpg.jpg/img.jpg"} />
+				<SongCard title={"Rope - Foo Fighters"} text={"From Wasting Light (2011)"} image={"https://img.discogs.com/ifWjm1vxuUupHl8n6YouNkQx-70=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-2817423-1304635652.jpeg.jpg"} />
+				<SongCard title={"Maths god - Slim Thakey"} text={"Single (2013)"} image={"https://media.discordapp.net/attachments/432278207148982283/492430199300816896/thake.png"} />
 			</div>
 		</div>
 

@@ -8,18 +8,20 @@ const Navbar = () => (
 				<div id="logo-text">InfraWave</div>
 			</a>
 			<ul id="nav-mobile" className="right hide-on-med-and-down">
-				<li><Link href="/">
-					<a className="material-icons" id={"home-tab"}>home</a>
-				</Link></li>
-				<li><Link href="/about">
-					<a>About</a>
-				</Link></li>
-				<li><Link href="/songs">
-					<a>Songs</a>
-				</Link></li>
+				<Tab link={"/"} name={"home"} icon={true}/>
+				<Tab link={"/songs"} name={"Songs"} icon={false}/>
+				<Tab link={"/albums"} name={"Albums"} icon={false}/>
+				<Tab link={"/about"} name={"About"} icon={false}/>
 			</ul>
 		</div>
 	</nav>
+);
+
+const Tab = (props) => (
+	<li><Link href={props.link}>
+			<a className={props.icon ? "material-icons" : ""} id={props.name.toLowerCase() + "-tab"}> {props.name} </a>
+		</Link>
+	</li>
 );
 
 export default Navbar
