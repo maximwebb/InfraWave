@@ -14,25 +14,4 @@ const App = () => (
 	</div>
 );
 
-function changeFavicon() {
-
-	//fav.href = "https://cdn.discordapp.com/emojis/287331251780845569.png";
-	if (!document.querySelectorAll('link[rel=icon]')[0]) {
-		let fav = document.createElement("link");
-		fav.rel = "icon";
-		fav.href = "/static/images/logo.ico";
-		document.getElementsByTagName('head')[0].appendChild(fav);
-		console.log('foo');
-	}
-}
-
-console.log('foo');
-
-const Favicon = () => (
-	<link rel = "shortcut icon" href = "https://cdn.discordapp.com/emojis/287331251780845569.png" type="image/x-icon" />
-)
-
-
-
-
 export default App
