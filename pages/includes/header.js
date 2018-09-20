@@ -16,7 +16,8 @@ const Header = () => (
 			<link rel="icon" href="static/images/logo.png" />
 
 			{/* Scripts */}
-			<script type="text/javascript" src="static/materialize/js/materialize.js"> </script>
+			<script type={"text/javascript"} src="static/materialize/js/materialize.js"> </script>
+			<script type={"text/javascript"} src={"../../static/scripts/scrollme/jquery.scrollme.js"}> </script>
 
 		</Head>
 	</div>
