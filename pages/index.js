@@ -5,6 +5,7 @@ import Navbar from './includes/navbar'
 import Title from './components/title'
 import Textbox from './components/textbox'
 import EmailInput from './components/email-input'
+import Clock from './components/clock'
 
 const App = () => (
 	<div className="blue-grey darken-4 white-text">
@@ -27,6 +28,7 @@ const App = () => (
 							<EmailInput id={"welcome"} type={"email"} button={true} />
 						</div>
 					</div>
+					<Clock />
 				</div>
 			</div>
 		</div>
