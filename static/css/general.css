@@ -1,5 +1,7 @@
 body {
-    background-color: #263238;
+    background-image: url('../images/infrawave_background.svg');
+    background-size: 2560px 1440px;
+    background-repeat: no-repeat;
     color: #FFFFFF;
 }
 

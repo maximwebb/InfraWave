@@ -8,7 +8,7 @@ import EmailInput from './components/email-input'
 import Clock from './components/clock'
 
 const App = () => (
-	<div className="blue-grey darken-4 white-text">
+	<div className="white-text-darken-3">
 		<Header />
 		<Navbar />
 		<div className="container">
@@ -16,10 +16,10 @@ const App = () => (
 			<Title text={"Welcome to InfraWave"} />
 			<br />
 			<div className={"row"}>
-				<div className={"card blue-grey lighten-1 col s10 offset-s1"} style={{paddingBottom: 80+ 'px', borderRadius: 25 + 'px'}}>
+				<div className={"col s10 offset-s1"} style={{paddingBottom: 80+ 'px', borderRadius: 25 + 'px'}}>
 					<div className={"row center"}>
 						<div className={"col s10 offset-s1"}>
-							<Textbox text={"InfraWave provides the tools you need to organise, manage and playing your favourite music."} />
+							<Textbox text={"InfraWave provides the tools you need to organise, manage and play your favourite music."} />
 						</div>
 					</div>
 					<div className={"row center"} >
@@ -28,7 +28,6 @@ const App = () => (
 							<EmailInput id={"welcome"} type={"email"} button={true} />
 						</div>
 					</div>
-					<Clock />
 				</div>
 			</div>
 		</div>

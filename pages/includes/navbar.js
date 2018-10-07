@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 const Navbar = () => (
-	<nav className="blue darken-3" role="navigation">
+	<nav className="transparent" role="navigation">
 		<div className="nav-wrapper container" id="desktop-nav-menu">
 			<a href="/">
 				<img id="logo-container" className="brand-logo left" src="/static/images/logo.svg"/>
