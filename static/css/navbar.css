@@ -1,11 +1,14 @@
 nav {
+    background-color: transparent;
     box-shadow: none;
+    transition: 0.4s ease;
 }
 
 #logo-container {
     top: 10%;
     height: 80%;
 }
+
 #logo-text {
     color: #fff;
     display: inline-block;

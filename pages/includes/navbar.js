@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 const Navbar = () => (
 	<div className={"navbar-fixed"}>
-		<nav className="transparent" role="navigation">
+		<nav role="navigation">
 			<div className="nav-wrapper container" id="desktop-nav-menu">
 				<a href="/">
 					<img id="logo-container" className="brand-logo left" src="/static/images/logo.svg"/>
