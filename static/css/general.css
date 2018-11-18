@@ -1,8 +1,36 @@
 body {
-    background-image: url('../images/infrawave_background.svg');
-    background-size: 2560px 1440px;
-    background-repeat: no-repeat;
     color: #FFFFFF;
+    background-color: #444;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+#section-1 {
+
+    background-image: url('../images/infrawave_background.svg');
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    padding-top: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+}
+
+#section-2 {
+    color: black;
+    display: block;
+}
+
+.title-text {
+    -webkit-margin-before: 0;
 }
 
 .card-container {
@@ -11,7 +39,6 @@ body {
     flex-direction: row-reverse;
 }
 
-
 .song-card {
     margin: 0 50px;
     cursor: pointer;
@@ -19,5 +46,5 @@ body {
 }
 
 .song-card:hover {
-    box-shadow: 0 8px 17px 2px rgba(256,256,256,0.12), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 17px 2px rgba(256, 256, 256, 0.12), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
 }
