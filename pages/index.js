@@ -1,10 +1,10 @@
 import React from 'react'
-import jQuery from 'jquery'
 import Header from './includes/header'
 import Navbar from './includes/navbar'
 import Title from './components/title'
 import Textbox from './components/textbox'
 import EmailInput from './components/email-input'
+import Link from 'next/link'
 
 const App = () => (
 	<div className="white-text-darken-3">
@@ -40,5 +40,24 @@ const App = () => (
 		{/*</div>*/}
 	</div>
 );
+
+// const PostLink = (props) => (
+// 	<li>
+// 		<Link as={`/kirkland/${props.id}`} href={`/post?title=${props.title}&num=${props.num}`}>
+// 			  <a>{props.title}</a>
+// 		</Link>
+// 	</li>
+// )
+//
+// const App = () => (
+// 	<div>
+// 		<p>Hello World</p>
+// 		<ul>
+// 			<PostLink id={"hello"} title={"Hi guys"} num={1}/>
+// 			<PostLink id={"small talk"} title={"How are you"} num={5}/>
+// 			<PostLink id={"goodbye"} title={"Goodbye!"} num={23}/>
+// 		</ul>
+// 	</div>
+// )
 
 export default App
