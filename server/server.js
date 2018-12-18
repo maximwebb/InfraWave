@@ -6,6 +6,7 @@ const nextApp = next(true);
 const express = require('express');
 const handle = nextApp.getRequestHandler();
 let app = express();
+const SongMethods = require('./update_songs');
 
 const port = 8000;
 
@@ -25,6 +26,7 @@ nextApp.prepare().then(() => {
 				console.log(err);
 			}
 			console.log('Connected');
+			//SongMethods.getSong();
 		});
 	});
 });
