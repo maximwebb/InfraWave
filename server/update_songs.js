@@ -6,7 +6,7 @@ module.exports = {
 	},
 	getSong() {
 
-		http.get('http://localhost:8000/server/get_song', (res) => {
+		http.get('http://localhost:8000/server/fetch_all_songs', (res) => {
 			let data = '';
 
 			res.on('data', (chunk) => {

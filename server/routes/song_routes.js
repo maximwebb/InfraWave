@@ -1,10 +1,10 @@
 var ObjectID = require('mongodb').ObjectID;
 
 module.exports = function(app, db) {
-	app.get('/server/get_song', (req, res) => {
+	app.get('/server/fetch_all_songs', (req, res) => {
 		//const details = { '_id': new ObjectID(req.params.id) };
 
-		db.collection('songs').findOne({}, (err, docs) => {
+		db.collection('songs').find({}).toArray((err, docs) => {
 			if (err) {
 				res.send({ 'error': err });
 			}

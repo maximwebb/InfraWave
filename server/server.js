@@ -1,32 +1,40 @@
-const MongoClient = require('mongodb').MongoClient;
-const db = require('./config/db');
-
+/* NextJS */
 const next = require('next');
-const nextApp = next(true);
-const express = require('express');
+const nextApp = next({ dev: true });
 const handle = nextApp.getRequestHandler();
-let app = express();
+
+/* ExpressJS */
+const express = require('express');
+
+/* MongoDB */
+const MongoClient = require('mongodb').MongoClient;
+const dbInfo = require('./config/db');
+//const mongoose = require('mongoose');
+//const db = mongoose.connect()
+
+/* Miscellaneous */
 const SongMethods = require('./update_songs');
+const { parse } = require('url');
 
-const port = 8000;
-
-
+const port = 3000;
 
 nextApp.prepare().then(() => {
-	MongoClient.connect(db.url, { useNewUrlParser: true }, (err, database) => {
-		if (err) {
-			console.log(err);
-		}
-		require('./routes')(app, database.db('infrawave_db'));
-		app.get('*', (req, res) => {
-			return handle(req, res);
-		});
-		app.listen(port, (err) => {
-			if (err) {
-				console.log(err);
-			}
-			console.log('Connected');
-			//SongMethods.getSong();
-		});
+	const app = express();
+
+	app.get('/server\*', (req, res) => {
+		res.send('API called.');
+		return 0;
+	});
+
+	app.get('*', (req, res) => {
+		const parsedUrl = parse(req.url, true);
+		const { pathname, query } = parsedUrl;
+		//res.send(pathname);
+		return handle(req, res, pathname);
+	});
+
+	app.listen(port, (err) => {
+		if (err) throw err;
+		console.log('Listening on port ' + port);
 	});
 });
