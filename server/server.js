@@ -9,8 +9,6 @@ const express = require('express');
 /* MongoDB */
 const MongoClient = require('mongodb').MongoClient;
 const dbInfo = require('./config/db');
-//const mongoose = require('mongoose');
-//const db = mongoose.connect()
 
 /* Miscellaneous */
 const SongMethods = require('./update_songs');
@@ -18,10 +16,19 @@ const { parse } = require('url');
 
 const port = 3000;
 
-nextApp.prepare().then(() => {
-	const app = express();
+//nextApp.prepare().then(() => {
+nextApp.prepare();
 
-	app.get('/server\*', (req, res) => {
+MongoClient.connect(dbInfo.url, (err, database) => {
+	const app = express();
+	if (err) console.log(err);
+
+	let db = database.db('infrawave_db');
+
+	require('./routes')(app, db);
+
+
+	app.get('/test\*', (req, res) => {
 		res.send('API called.');
 		return 0;
 	});
@@ -29,7 +36,6 @@ nextApp.prepare().then(() => {
 	app.get('*', (req, res) => {
 		const parsedUrl = parse(req.url, true);
 		const { pathname, query } = parsedUrl;
-		//res.send(pathname);
 		return handle(req, res, pathname);
 	});
 
