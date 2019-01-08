@@ -20,7 +20,6 @@ const Header = () => (
 			{/* Scripts */}
 			<script type={"text/javascript"} src="static/materialize/js/materialize.js"> </script>
 			<script type={"text/javascript"} src="static/scripts/scroll-nav.js"> </script>
-			{/*<script type={"text/javascript"} src={"../../static/scripts/scrollme/jquery.scrollme.js"}> </script>*/}
 
 		</Head>
 	</div>

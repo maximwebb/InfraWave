@@ -34,30 +34,7 @@ const App = () => (
 				</div>
 			</div>
 		</div>
-
-		{/*<div className={"container"} id={"section-2"}>*/}
-			{/*<p>This is some text. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>*/}
-		{/*</div>*/}
 	</div>
 );
-
-// const PostLink = (props) => (
-// 	<li>
-// 		<Link as={`/kirkland/${props.id}`} href={`/post?title=${props.title}&num=${props.num}`}>
-// 			  <a>{props.title}</a>
-// 		</Link>
-// 	</li>
-// )
-//
-// const App = () => (
-// 	<div>
-// 		<p>Hello World</p>
-// 		<ul>
-// 			<PostLink id={"hello"} title={"Hi guys"} num={1}/>
-// 			<PostLink id={"small talk"} title={"How are you"} num={5}/>
-// 			<PostLink id={"goodbye"} title={"Goodbye!"} num={23}/>
-// 		</ul>
-// 	</div>
-// )
 
 export default App
