@@ -12,7 +12,6 @@ const Songs = (props) => (
 		<div className={"container"}>
 			<Title text={"Songs"} />
 			<div className={"row center card-container"}>
-				<button onClick={ Songs.ofrick() }>asdf</button>
 				{
 					props.songs.map((song) => {
 						return <SongCard title={song.title} text={song.description} key={song._id}> </SongCard>
