@@ -1,28 +1,34 @@
 import Head from 'next/head'
 
-const Header = () => (
-	<div>
-		<Head>
-			<title>InfraWave</title>
+export default class Header extends React.Component {
+	constructor() {
+		super();
+	}
 
-			<meta name="viewport" content="width=device-width, initial-scale=1" />
+	render() {
+		return (
+			<div>
+				<Head>
+					<title>InfraWave</title>
 
-			{/* Stylesheets */}
-			<link rel={"stylesheet"} href={"static/materialize/css/materialize.css"}/>
-			<link rel={"stylesheet"} href={"static/css/general.css"}/>
-			<link rel={"stylesheet"} href={"static/css/navbar.css"}/>
+					<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-			{/* Other */}
-			<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-			<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet" />
-			<link rel="icon" href="static/images/logo.png" />
+					{/* Stylesheets */}
+					<link rel={"stylesheet"} href={"static/materialize/css/materialize.css"}/>
+					<link rel={"stylesheet"} href={"static/css/general.css"}/>
+					<link rel={"stylesheet"} href={"static/css/navbar.css"}/>
 
-			{/* Scripts */}
-			<script type={"text/javascript"} src="static/materialize/js/materialize.js"> </script>
-			<script type={"text/javascript"} src="static/scripts/scroll-nav.js"> </script>
+					{/* Other */}
+					<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+					<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet" />
+					<link rel="icon" href="static/images/logo.png" />
 
-		</Head>
-	</div>
-);
+					{/* Scripts */}
+					<script type={"text/javascript"} src="static/materialize/js/materialize.js"> </script>
+					<script type={"text/javascript"} src="static/scripts/scroll_nav.js"> </script>
 
-export default Header
+				</Head>
+			</div>
+		);
+	}
+}

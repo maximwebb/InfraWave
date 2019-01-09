@@ -1,4 +1,4 @@
-/* A series of common string methods. */
+/* A collection of useful string methods. */
 
 module.exports = {
 	toProperCase: function (string) {

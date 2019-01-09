@@ -8,20 +8,45 @@ body, html {
     margin: 0;
 }
 
-#section-1 {
+#add-song-button {
+    width: 40px;
+    height: 40px;
+    line-height: 46px;
+    text-align: center;
 
-    background-image: url('../images/infrawave_background.svg');
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    padding-top: 50px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    font-size: 1.6rem;
+    transition: 0.2s;
+    background-color: #818adb;
+    border-radius: 150px;
+}
+
+#add-song-button:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+@keyframes form-change {
+    0% { border-radius: 150px; color: white }
+    5% { color: transparent }
+    20% { border-radius: 0 }
+    70% { width: 100%; height: 200px }
+    100% { color: transparent; border-radius: 0; width: 100%; height: 200px  }
+}
+
+#section-1 {
     display: block;
-    object-fit: cover;
+    position: absolute;
+
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    padding-top: 50px;
+
+    background: url('../images/infrawave_background.svg') no-repeat center;
+    background-size: cover;
+
 }
 
 #section-2 {
@@ -37,6 +62,19 @@ body, html {
     display: flex;
     justify-content: space-evenly;
     flex-direction: row-reverse;
+}
+
+.open-button {
+    animation: form-change 0.2s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.open-button i {
+    display: none;
+}
+
+.closed-button i {
+    display: inline-block;
 }
 
 .song-card {

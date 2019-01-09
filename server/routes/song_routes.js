@@ -7,7 +7,6 @@ module.exports = function(app, db) {
 				res.send({ 'error': err });
 			}
 			else {
-				console.log(docs);
 				res.send(docs);
 			}
 		});
@@ -15,7 +14,7 @@ module.exports = function(app, db) {
 
 	app.post('/server/add_song', (req, res) => {
 		console.log(req.body.title);
-		res.send('thanks');
+		res.send(req.body.title);
 
 		//const song = { 'title': 'Beserk', 'description': 'Song by eminem.'};
 		// db.collection('songs').insertOne(song, (err, result) => {

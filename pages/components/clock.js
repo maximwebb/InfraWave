@@ -8,6 +8,7 @@ export default class Clock extends React.Component {
 			date: new Date(),
 			textColor: 'white'
 		};
+		this.sayHi = this.sayHi.bind(this);
 	}
 
 	componentDidMount() {
@@ -24,12 +25,14 @@ export default class Clock extends React.Component {
 	tick() {
 		this.setState({
 			date: new Date(),
-			textColor: 'green'
+			textColor: 'red'
 		});
 	}
 
 	sayHi() {
-
+		this.setState({
+			textColor: 'green'
+		});
 	}
 
 	render() {
