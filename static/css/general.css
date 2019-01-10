@@ -60,8 +60,12 @@ body, html {
 
 .card-container {
     display: flex;
-    justify-content: space-evenly;
-    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: stretch;
+
+    text-align: center;
 }
 
 .open-button {
@@ -78,9 +82,17 @@ body, html {
 }
 
 .song-card {
-    margin: 0 50px;
+    width: 200px;
     cursor: pointer;
     transition: 0.3s;
+}
+
+.song-card p {
+    color: #e8e8e8;
+}
+
+.song-card span {
+    font-weight: 400 !important;
 }
 
 .song-card:hover {

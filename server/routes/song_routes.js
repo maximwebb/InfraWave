@@ -13,18 +13,15 @@ module.exports = function(app, db) {
 	});
 
 	app.post('/server/add_song', (req, res) => {
-		console.log(req.body.title);
-		res.send(req.body.title);
-
-		//const song = { 'title': 'Beserk', 'description': 'Song by eminem.'};
-		// db.collection('songs').insertOne(song, (err, result) => {
-		// 	if (err) {
-		// 		res.send({ 'error': err });
-		// 	}
-		// 	else {
-		// 		console.log(result.ops[0]);
-		// 		res.send('Song successfully added.');
-		// 	}
-		// })
+		console.log('POST request received');
+		const song = { 'title': 'Blame it on the Boogie', 'description': 'Song by Michael Jackson'};
+		db.collection('songs').insertOne(song, (err, result) => {
+			if (err) {
+				res.send({ 'error': err });
+			}
+			else {
+				res.send('Song successfully added.');
+			}
+		})
 	});
 };
