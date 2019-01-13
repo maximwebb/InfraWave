@@ -1,7 +1,7 @@
 import React from 'react'
 
 const IMG = (props) => (
-	<div className="card s6 m4 l4 xl3 blue-grey song-card">
+	<div className="card s6 m4 l4 xl3 blue-grey song-card" href={props.link}>
 		{props.image &&
 			<div className={"card-image"}>
 				 <img src={props.image} />
@@ -12,7 +12,7 @@ const IMG = (props) => (
 			{!props.image &&
 				<span className="card-title">{props.title}</span>
 			}
-			<p>{props.text}</p>
+			<p>By {props.artist}</p>
 		</div>
 
 	</div>

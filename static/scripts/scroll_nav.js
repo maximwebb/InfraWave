@@ -14,5 +14,4 @@ window.onscroll = function(e) {
 		document.querySelector('nav').style.boxShadow = 'none';
 		document.querySelector('nav').style.backgroundColor = 'transparent';
 	}
-	console.log(scrollAmount);
 }

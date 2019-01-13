@@ -2,17 +2,13 @@ import React from 'react'
 import Header from './includes/header'
 import Navbar from './includes/navbar'
 import { Title, Subheading } from './components/title'
-import AddSongForm from './components/add_song_form'
 import SongCard from './components/card'
+import Icon from "./components/icon";
+import 'isomorphic-unfetch';
 
 export default class Songs extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			text: 'Click me!'
-		}
-		this.sayHi = this.sayHi.bind(this);
-		//this.fetchAllSongs = this.fetchAllSongs.bind(this);
 	}
 
 	static getInitialProps() {
@@ -27,28 +23,17 @@ export default class Songs extends React.Component {
 		}
 	}
 
-	async addSong(details) {
+	static async addSong(details) {
 		console.log('asdf');
 		return fetch('http://localhost:3000/server/add_song', {
 			method: 'POST',
-			mode: 'same-origin',
-			cache: 'no-cache',
-			credentials: 'same-origin',
 			headers: {
-				'Content-Type': 'application/x-wwww-form-urlencoded'
+				'Content-Type': 'application/x-www-form-urlencoded'
 			},
-			redirect: 'follow',
-			referrer: 'no-referrer',
-			body: 'title=So%20Bad&description=This%20is%20another%20song.'
+			body: 'title=' + encodeURIComponent(details.title) + '&artist=' + encodeURIComponent(details.artist) + '&link=' + encodeURIComponent(details.link)
 		}).then((response) => {
-			console.log(response);
+			this.fetchAllSongs();
 		});
-	}
-
-	sayHi() {
-		this.setState({
-			text: 'hello'
-		})
 	}
 
 	render() {
@@ -61,16 +46,74 @@ export default class Songs extends React.Component {
 					<div className={"card-container"}>
 						{
 							this.props.songs.map((song) => {
-								return <SongCard title={song.title} text={song.description} key={song._id}> </SongCard>
+								return <SongCard title={song.title} artist={song.artist} link={song.link} key={song._id}> </SongCard>
 							})
 						}
 					</div>
 					<div className={"row center card"}>
 						<AddSongForm />
 					</div>
-					<button className={"btn waves-effect waves-light"} id={"btn"} onClick={this.addSong}>{this.state.text}</button>
+					<button className={"btn waves-effect waves-light"} id={"btn"} onClick={Songs.addSong}>Click me</button>
 				</div>
 			</div>
+		);
+	}
+}
+
+class AddSongForm extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {songName: '', artistName: '', songLink: ''};
+
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+
+	handleChange(event) {
+		if (event.target.id === 'song-name') {
+			this.setState({ songName: event.target.value });
+		}
+		else if (event.target.id === 'artist-name') {
+			this.setState({ artistName: event.target.value });
+		}
+		else if (event.target.id === 'song-link') {
+			this.setState({ songLink: event.target.value });
+		}
+	}
+
+	handleSubmit(event) {
+		let details = {
+			title: this.state.songName,
+			artist: this.state.artistName,
+			link: this.state.songLink
+		};
+		console.log(this.state.songName + ' - song by ' + this.state.artistName + ' . Link: ' + this.state.songLink);
+		Songs.addSong(details);
+		event.preventDefault();
+	}
+
+	render() {
+		return (
+			<form className={"center"} onSubmit={this.handleSubmit}>
+				<div className={"input-field col s4 offset-s1"}>
+					<input id={"song-name"} type={"text"} onChange={this.handleChange}/>
+					<label htmlFor={"song-name"}>Song name</label>
+				</div>
+				<div className={"input-field col s4 offset-s1"}>
+					<input id={"artist-name"} type={"text"} onChange={this.handleChange}/>
+					<label htmlFor={"artist-name"}>Artist</label>
+				</div>
+				<div className={"input-field col s4 offset-s1"}>
+					<input id={"song-link"} type={"text"} onChange={this.handleChange}/>
+					<label htmlFor={"song-link"}>Link</label>
+				</div>
+
+				<div className={"input-field col s2"}>
+					<button className={"btn waves-effect waves-light"} type={"submit"} value={"Submit"}>Submit
+						<Icon text={"send"} />
+					</button>
+				</div>
+			</form>
 		);
 	}
 }
