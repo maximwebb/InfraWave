@@ -9,20 +9,27 @@ import 'isomorphic-unfetch';
 export default class Songs extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			score: 0,
+			songs: []
+		};
+		this.fetchAPIdata = this.fetchAPIdata.bind(this);
+		this.fetchAllSongs = this.fetchAllSongs.bind(this);
+		this.fetchAllSongs();
 	}
 
-	static getInitialProps() {
-		return this.fetchAllSongs();
-	}
-
-	static async fetchAllSongs() {
+	//Fetches latest song list from database
+	async fetchAllSongs() {
 		const res = await fetch('http://localhost:3000/server/fetch_all_songs');
 		const data = await res.json();
-		return {
-			songs: data
-		}
+
+		this.setState({
+			score: data[0].title,
+			songs : data
+		});
 	}
 
+	//Post request to API
 	static async addSong(details) {
 		console.log('asdf');
 		return fetch('http://localhost:3000/server/add_song', {
@@ -31,8 +38,21 @@ export default class Songs extends React.Component {
 				'Content-Type': 'application/x-www-form-urlencoded'
 			},
 			body: 'title=' + encodeURIComponent(details.title) + '&artist=' + encodeURIComponent(details.artist) + '&link=' + encodeURIComponent(details.link)
-		}).then((response) => {
-			this.fetchAllSongs();
+		}).then((response) => (
+			Songs.setState({
+				score: 5
+			})
+		));
+	}
+
+	//Test for accessing external API
+	async fetchAPIdata() {
+		console.log('data successfully received');
+		const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
+		const data = await res.json();
+		this.setState({
+			score: data[0].score,
+			shows: data
 		});
 	}
 
@@ -43,9 +63,10 @@ export default class Songs extends React.Component {
 				<Navbar />
 				<div className={"container"}>
 					<Title text={"Songs"} />
+					<p>Score: { this.state.score } </p>
 					<div className={"card-container"}>
 						{
-							this.props.songs.map((song) => {
+							this.state.songs.map((song) => {
 								return <SongCard title={song.title} artist={song.artist} link={song.link} key={song._id}> </SongCard>
 							})
 						}
@@ -53,7 +74,7 @@ export default class Songs extends React.Component {
 					<div className={"row center card"}>
 						<AddSongForm />
 					</div>
-					<button className={"btn waves-effect waves-light"} id={"btn"} onClick={Songs.addSong}>Click me</button>
+					<button className={"btn waves-effect waves-light"} id={"btn"} onClick={this.fetchAllSongs}>Click me</button>
 				</div>
 			</div>
 		);

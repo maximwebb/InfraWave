@@ -68,6 +68,10 @@ body, html {
     text-align: center;
 }
 
+.card-container a {
+    color: #e8e8e8;
+}
+
 .open-button {
     animation: form-change 0.2s ease-in-out;
     animation-fill-mode: forwards;
