@@ -5,7 +5,6 @@ import { Title, Subheading } from './components/title'
 import SongCard from './components/card'
 import Icon from "./components/icon"
 import 'isomorphic-unfetch'
-//const {google} = require('googleapis');
 
 export default class Songs extends React.Component {
 	constructor(props) {
@@ -105,13 +104,8 @@ export default class Songs extends React.Component {
 				{this.state.loaded &&
 					<div className={"container"}>
 						<Title text={"Songs"}/>
-						<div className={"card-container"}>
-							{
-								this.state.songs.map((song) => {
-									return <SongCard title={song.title} artist={song.artist} link={song.link} key={song._id}> </SongCard>
-								})
-							}
-						</div>
+
+						{/* Add song input */}
 						{this.state.formState === 0 &&
 							<div className={"row center card"}>
 								<form className={"center"} onSubmit={this.handleSubmit}>
@@ -133,9 +127,24 @@ export default class Songs extends React.Component {
 								</form>
 							</div>
 						}
-						<button className={"btn waves-effect waves-light"} id={"btn"}
-								onClick={this.fetchYoutubeResults}>Click me
-						</button>
+
+						{/* Table of songs */}
+						<table className={""} id={"songs-table"}>
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Artist</th>
+									<th>Length</th>
+								</tr>
+							</thead>
+							<tbody>
+							{
+								this.state.songs.map((song) => {
+									return <tr className={""}><td>{song.title}</td><td>{song.artist}</td><td>5:00</td></tr>
+								})
+							}
+							</tbody>
+						</table>
 					</div>
 				}
 			</div>
