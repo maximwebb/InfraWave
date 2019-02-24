@@ -11,9 +11,7 @@ export default class Songs extends React.Component {
 		super(props);
 		this.state = {
 			songs: [],
-			songDetails: {
-				songName: '',
-				songLink: ''},
+			songDetails: '',
 			formState: 0,
 			loaded: false
 		};
@@ -21,6 +19,7 @@ export default class Songs extends React.Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.fetchYoutubeResults = this.fetchYoutubeResults.bind(this);
+		this.changeForm = this.changeForm.bind(this);
 
 		this.fetchAllSongs().then(() => (this.setState({ loaded: true })));
 	}
@@ -49,13 +48,12 @@ export default class Songs extends React.Component {
 	//Fetches search results from YouTube API
 	async fetchYoutubeResults() {
 		let res;
-		if (this.state.songDetails.songLink) {
-			const songID = encodeURIComponent(this.state.songDetails.songLink.split('=')[1]);
-			console.log(songID);
+		if (this.state.songDetails.split('=')[0] === 'https://www.youtube.com/watch?v') {
+			const songID = encodeURIComponent(this.state.songDetails.split('=')[1]);
 			res = await fetch(`https://www.googleapis.com/youtube/v3/videos?id=${songID}&key=AIzaSyBqv3usabo6RmE2IgN4RF08krhGfpKcJfM&part=snippet`);
 		}
 		else {
-			res = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${this.state.songDetails.songName}&type=video&part=snippet&key=AIzaSyBqv3usabo6RmE2IgN4RF08krhGfpKcJfM`);
+			res = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${this.state.songDetails}&type=video&part=snippet&key=AIzaSyBqv3usabo6RmE2IgN4RF08krhGfpKcJfM`);
 		}
 
 		const body = await res.json();
@@ -67,33 +65,25 @@ export default class Songs extends React.Component {
 	//Updates state when form is edited
 	handleChange(event) {
 		event.persist();
-		if (event.target.id === 'song-name') {
-			this.setState(prevState => ({
-				songDetails: {
-					...prevState.songDetails,
-					songName: event.target.value
-				}
-			}));
-		}
-		else if (event.target.id === 'song-link') {
-			this.setState(prevState => ({
-				songDetails: {
-					...prevState.songDetails,
-					songLink: event.target.value
-				}
-			}));
-		}
+		this.setState({
+			songDetails: event.target.value
+		});
 	}
 
 	handleSubmit(event) {
-		if (this.state.songDetails.songName || this.state.songDetails.songLink) {
+		if (this.state.songDetails) {
 			this.fetchYoutubeResults();
 		}
 		else {
 			alert('Please enter a song name or link.')
 		}
-
 		event.preventDefault();
+	}
+
+	changeForm() {
+		this.setState({
+			formState: 1
+		})
 	}
 
 	render() {
@@ -106,19 +96,19 @@ export default class Songs extends React.Component {
 						<Title text={"Songs"}/>
 
 						{/* Add song input */}
-						{this.state.formState === 0 &&
-							<div className={"row center card"}>
+						<div className={"row"}>
+							{/* Form hidden */}
+							<div className={"col s2 center btn-stage-" + this.state.formState} id={"form-btn"} onClick={this.changeForm}>
+								Add Song
+								<Icon text={"add"}/>
+							</div>
+							<div className={'form-stage-' + this.state.formState} id={"song-form"}>
 								<form className={"center"} onSubmit={this.handleSubmit}>
-									<div className={"input-field col s4 offset-s1"}>
+									<div className={"input-field text-input col s6"}>
 										<input id={"song-name"} type={"text"} onChange={this.handleChange}/>
-										<label htmlFor={"song-name"}>Song name</label>
+										<label htmlFor={"song-name"}>Song</label>
 									</div>
-									<div className={"input-field col s4 offset-s1"}>
-										<input id={"song-link"} type={"text"} onChange={this.handleChange}/>
-										<label htmlFor={"song-link"}>Link (optional)</label>
-									</div>
-
-									<div className={"input-field col s2"}>
+									<div className={"input-field button-input col s2"}>
 										<button className={"btn waves-effect waves-light"} type={"submit"}
 												value={"Submit"}>Submit
 											<Icon text={"send"}/>
@@ -126,7 +116,7 @@ export default class Songs extends React.Component {
 									</div>
 								</form>
 							</div>
-						}
+						</div>
 
 						{/* Table of songs */}
 						<table className={""} id={"songs-table"}>
@@ -139,8 +129,8 @@ export default class Songs extends React.Component {
 							</thead>
 							<tbody>
 							{
-								this.state.songs.map((song) => {
-									return <tr className={""}><td>{song.title}</td><td>{song.artist}</td><td>5:00</td></tr>
+								this.state.songs.map((song, id) => {
+									return <tr key={id}><td>{song.title}</td><td>{song.artist}</td><td>5:00</td></tr>
 								})
 							}
 							</tbody>

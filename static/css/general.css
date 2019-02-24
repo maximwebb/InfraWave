@@ -37,23 +37,6 @@ body, html {
     display: block;
 }
 
-#add-song-button {
-    width: 40px;
-    height: 40px;
-    line-height: 46px;
-    text-align: center;
-
-    font-size: 1.6rem;
-    transition: 0.2s;
-    background-color: #818adb;
-    border-radius: 150px;
-}
-
-#add-song-button:hover {
-    cursor: pointer;
-    opacity: 0.8;
-}
-
 #songs-table {
     margin-top: 50px;
     padding: 0 40px;
@@ -85,6 +68,22 @@ body, html {
     cursor: pointer;
 }
 
+#song-form {
+
+}
+
+#form-btn {
+    padding: 15px;
+    border-radius: 4px;
+    background-color: #2196F3;
+    transition: 0.2s ease;
+}
+
+#form-btn:hover {
+    cursor: pointer;
+    background-color: #00b0ff;
+}
+
 #now-playing {
     background: linear-gradient(to right, #33ccff 0%, #ff99cc 100%);
 }
@@ -105,6 +104,45 @@ body, html {
 
 .card-container a {
     color: #e8e8e8;
+}
+
+.form-stage-0 {
+    display: none;
+}
+
+.form-stage-1 .text-input {
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: grow-left cubic-bezier(0.785, 0.135, 0.15, 0.86) 0.3s forwards;
+}
+
+.form-stage-1 .button-input {
+    opacity: 0;
+    animation: fade 0.3s forwards;
+    animation-delay: 0.3s;
+}
+
+.btn-stage-1 {
+    display: none;
+}
+
+@keyframes grow-left {
+    0% {
+        transform: scaleX(0);
+        background-color: #444;
+    }
+    100% {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .open-button {
