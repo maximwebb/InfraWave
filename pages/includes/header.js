@@ -24,9 +24,8 @@ export default class Header extends React.Component {
 					<link rel="icon" href="static/images/logo.png" />
 
 					{/* Scripts */}
-					<script type={"text/javascript"} src="static/materialize/js/materialize.js"> </script>
-					<script type={"text/javascript"} src="static/scripts/scroll_nav.js"> </script>
-
+					<script type={"text/javascript"} src={"static/materialize/js/materialize.js"}> </script>
+					<script type={"text/javascript"} src={"static/scripts/scroll_nav.js"}> </script>
 				</Head>
 			</div>
 		);

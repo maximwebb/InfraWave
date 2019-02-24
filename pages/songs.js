@@ -3,19 +3,27 @@ import Header from './includes/header'
 import Navbar from './includes/navbar'
 import { Title, Subheading } from './components/title'
 import SongCard from './components/card'
-import Icon from "./components/icon";
-import 'isomorphic-unfetch';
+import Icon from "./components/icon"
+import 'isomorphic-unfetch'
+//const {google} = require('googleapis');
 
 export default class Songs extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			score: 0,
-			songs: []
+			songs: [],
+			songDetails: {
+				songName: '',
+				songLink: ''},
+			formState: 0,
+			loaded: false
 		};
-		this.fetchAPIdata = this.fetchAPIdata.bind(this);
 		this.fetchAllSongs = this.fetchAllSongs.bind(this);
-		this.fetchAllSongs();
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.fetchYoutubeResults = this.fetchYoutubeResults.bind(this);
+
+		this.fetchAllSongs().then(() => (this.setState({ loaded: true })));
 	}
 
 	//Fetches latest song list from database
@@ -24,36 +32,69 @@ export default class Songs extends React.Component {
 		const data = await res.json();
 
 		this.setState({
-			score: data[0].title,
 			songs : data
 		});
 	}
 
 	//Post request to API
-	static async addSong(details) {
-		console.log('asdf');
+	async addSong(details) {
 		return fetch('http://localhost:3000/server/add_song', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded'
 			},
 			body: 'title=' + encodeURIComponent(details.title) + '&artist=' + encodeURIComponent(details.artist) + '&link=' + encodeURIComponent(details.link)
-		}).then((response) => (
-			Songs.setState({
-				score: 5
-			})
-		));
+		})
 	}
 
-	//Test for accessing external API
-	async fetchAPIdata() {
-		console.log('data successfully received');
-		const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
-		const data = await res.json();
-		this.setState({
-			score: data[0].score,
-			shows: data
-		});
+	//Fetches search results from YouTube API
+	async fetchYoutubeResults() {
+		let res;
+		if (this.state.songDetails.songLink) {
+			const songID = encodeURIComponent(this.state.songDetails.songLink.split('=')[1]);
+			console.log(songID);
+			res = await fetch(`https://www.googleapis.com/youtube/v3/videos?id=${songID}&key=AIzaSyBqv3usabo6RmE2IgN4RF08krhGfpKcJfM&part=snippet`);
+		}
+		else {
+			res = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${this.state.songDetails.songName}&type=video&part=snippet&key=AIzaSyBqv3usabo6RmE2IgN4RF08krhGfpKcJfM`);
+		}
+
+		const body = await res.json();
+		console.log(body);
+		console.log('Hi Maxim, your video is here: https://www.youtube.com/watch?v=' + body.items[0].id.videoId);
+		console.log('Interesting, it seems to be on "' + body.items[0].snippet.title + '"');
+	}
+
+	//Updates state when form is edited
+	handleChange(event) {
+		event.persist();
+		if (event.target.id === 'song-name') {
+			this.setState(prevState => ({
+				songDetails: {
+					...prevState.songDetails,
+					songName: event.target.value
+				}
+			}));
+		}
+		else if (event.target.id === 'song-link') {
+			this.setState(prevState => ({
+				songDetails: {
+					...prevState.songDetails,
+					songLink: event.target.value
+				}
+			}));
+		}
+	}
+
+	handleSubmit(event) {
+		if (this.state.songDetails.songName || this.state.songDetails.songLink) {
+			this.fetchYoutubeResults();
+		}
+		else {
+			alert('Please enter a song name or link.')
+		}
+
+		event.preventDefault();
 	}
 
 	render() {
@@ -61,21 +102,42 @@ export default class Songs extends React.Component {
 			<div>
 				<Header />
 				<Navbar />
-				<div className={"container"}>
-					<Title text={"Songs"} />
-					<p>Score: { this.state.score } </p>
-					<div className={"card-container"}>
-						{
-							this.state.songs.map((song) => {
-								return <SongCard title={song.title} artist={song.artist} link={song.link} key={song._id}> </SongCard>
-							})
+				{this.state.loaded &&
+					<div className={"container"}>
+						<Title text={"Songs"}/>
+						<div className={"card-container"}>
+							{
+								this.state.songs.map((song) => {
+									return <SongCard title={song.title} artist={song.artist} link={song.link} key={song._id}> </SongCard>
+								})
+							}
+						</div>
+						{this.state.formState === 0 &&
+							<div className={"row center card"}>
+								<form className={"center"} onSubmit={this.handleSubmit}>
+									<div className={"input-field col s4 offset-s1"}>
+										<input id={"song-name"} type={"text"} onChange={this.handleChange}/>
+										<label htmlFor={"song-name"}>Song name</label>
+									</div>
+									<div className={"input-field col s4 offset-s1"}>
+										<input id={"song-link"} type={"text"} onChange={this.handleChange}/>
+										<label htmlFor={"song-link"}>Link (optional)</label>
+									</div>
+
+									<div className={"input-field col s2"}>
+										<button className={"btn waves-effect waves-light"} type={"submit"}
+												value={"Submit"}>Submit
+											<Icon text={"send"}/>
+										</button>
+									</div>
+								</form>
+							</div>
 						}
+						<button className={"btn waves-effect waves-light"} id={"btn"}
+								onClick={this.fetchYoutubeResults}>Click me
+						</button>
 					</div>
-					<div className={"row center card"}>
-						<AddSongForm />
-					</div>
-					<button className={"btn waves-effect waves-light"} id={"btn"} onClick={this.fetchAllSongs}>Click me</button>
-				</div>
+				}
 			</div>
 		);
 	}
@@ -84,7 +146,11 @@ export default class Songs extends React.Component {
 class AddSongForm extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {songName: '', artistName: '', songLink: ''};
+		this.state = {songName: '',
+			artistName: '',
+			songLink: '',
+			showResult: false
+		};
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -131,7 +197,7 @@ class AddSongForm extends React.Component {
 
 				<div className={"input-field col s2"}>
 					<button className={"btn waves-effect waves-light"} type={"submit"} value={"Submit"}>Submit
-						<Icon text={"send"} />
+						<Icon text={"send"}/>
 					</button>
 				</div>
 			</form>
