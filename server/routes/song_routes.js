@@ -33,10 +33,10 @@ module.exports = function(app, db) {
 		const id = req.params.id;
 		const details = { '_id': new ObjectID(id) };
 
+		//* Checks if keys in search request are valid, and if so, constructs song object. */
 		let song = {};
 		let parameters = ['title', 'artist', 'link', 'duration', 'thumbnail'];
 		for (let i of Object.keys(req.body)) {
-			//Checks if keys in search request are valid, and constructs song object if so.
 			if (parameters.find((param) => { return i === param })) {
 				song[i] = req.body[i];
 			}
@@ -52,17 +52,17 @@ module.exports = function(app, db) {
 		});
 	});
 
-	app.delete('/server/delete_song/:id', (req, res) => {
-		const id = req.params.id;
-		const name = req.query.name;
-		const details = { '_id': new ObjectID(id) };
-
-		db.collection('songs').deleteOne(details, (err, result) => {
+	app.delete('/server/delete_song', (req, res) => {
+		const IDList = req.query.id.split(`,`);
+		//const IDList = ["5c7700ca165e5e12f42070e1", "5c7700a5165e5e12f42070e0"];
+		const objectIDList = IDList.map((id) => (new ObjectID(id)));
+		console.log(objectIDList);
+		db.collection('songs').deleteMany({'_id': {$in:objectIDList}}, (err, result) => {
 			if (err) {
 				res.send(err);
 			}
 			else {
-				res.send(`Song successfully deleted.`);
+				res.send(`Song(s) successfully deleted.`);
 			}
 		});
 	})

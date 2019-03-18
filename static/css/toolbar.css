@@ -1,0 +1,22 @@
+#close-tab:hover {
+    cursor: pointer;
+}
+
+.toolbar-link p, .toolbar-link i {
+    display: inline !important
+}
+
+.toolbar-tab {
+    display: inline;
+}
+
+.toolbar-link p {
+    vertical-align: top;
+    margin-left: 10px;
+    /*opacity: 0;*/
+    transition: 0.2s ease;
+}
+
+.toolbar-link:hover p {
+    opacity: 1;
+}

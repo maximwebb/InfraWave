@@ -5,6 +5,16 @@ import {Title} from './components/title'
 export default class About extends React.Component {
 	constructor() {
 		super();
+		this.state = {
+			count: 0
+		};
+		this.incrementCounter = this.incrementCounter.bind(this);
+	}
+
+	incrementCounter() {
+		this.setState({
+			count: this.state.count + 1
+		})
 	}
 
 	render() {
@@ -14,9 +24,24 @@ export default class About extends React.Component {
 				<Navbar />
 				<div className="container">
 					<Title text={"About InfraWave"} />
-					<p>This is about</p>
+					<p>Count: {this.state.count} </p>
 				</div>
+				<Foo count={this.state.count} incrementCounter={this.incrementCounter} />
 			</div>
 		);
+	}
+}
+
+class Foo extends React.Component {
+	constructor() {
+		super();
+	}
+
+	render() {
+		return (
+			<div>
+				<button onClick={this.props.incrementCounter} >Hello</button>
+			</div>
+		)
 	}
 }
